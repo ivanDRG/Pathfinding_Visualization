@@ -47,7 +47,7 @@ class Node:
         return self.color == TURQUOISE
     
     def reset(self):
-        return self.color == WHITE
+        self.color = WHITE
     
     def make_closed(self):
         self.color == RED
@@ -152,7 +152,14 @@ def main(win, width):
                     node.make_barrier()
 
             elif pygame.mouse.get_pressed()[2]: #RIGHT
-              pass  
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                node = grid[row][col]
+                node.reset()
+                if node == start:
+                    start = None
+                if node == end:
+                    end = None  
     pygame.quit()
 
 main(WIN, WIDTH)
